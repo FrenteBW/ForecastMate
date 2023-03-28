@@ -28,7 +28,7 @@ struct HomeView: View {
                 
                 VStack {
                     VStack(alignment: .leading, spacing: 5) {
-                        Text("Weather Assistant")
+                        Text("ForecastMate")
                             .bold()
                             .font(.title)
                             .foregroundColor(.white)
@@ -91,7 +91,7 @@ struct HomeView: View {
                                     HStack{
                                         WeatherRow(logo: "humidity", name: "Humidity", value: "\(weatherKitManager.humid.roundDouble())%")//value에 습도 변경하기
                                         Spacer()
-                                        WeatherRow(logo: "thermometer.sun", name: "WindChill ", value: (weatherKitManager.realtemp.roundDouble() + ("°")))
+                                        WeatherRow(logo: "thermometer.sun", name: "Windchill ", value: (weatherKitManager.realtemp.roundDouble() + ("°")))
                                         Spacer()
                                     }.lineLimit(1)
 
@@ -137,7 +137,6 @@ struct HomeView: View {
                 .padding()
                 .frame(maxWidth: .infinity, alignment: .leading)
             }
-            //.preferredColorScheme(.light)
             .task {
                 await weatherKitManager.getWeather(latitude: locationDataManager.latitude, longitude: locationDataManager.longitude)
             }

@@ -22,20 +22,20 @@ struct Provider: TimelineProvider {
         let entry = SimpleEntry(date: Date(), dailycontidion: " ", todaysymbol: " ", hightemp: 0.0, lowtemp: 0.0)
         completion(entry)
     }
-        
+     
     func getTimeline(in context: Context, completion: @escaping (Timeline<Entry>) -> ()) {
         Task {
-            let nextUpdate = Date().addingTimeInterval(28800)
-
             let sampleLocation = CLLocation(latitude: widgetlocationDataManager
                 .latitude, longitude: widgetlocationDataManager.longitude)
                 
             let weather = try await WeatherService.shared.weather(for: sampleLocation)
             let entry = SimpleEntry(date: .now, dailycontidion: weather.dailyForecast[0].condition.description, todaysymbol: weather.dailyForecast[0].symbolName.description, hightemp: weather.dailyForecast[0].highTemperature.value, lowtemp: weather.dailyForecast[0].lowTemperature.value)
             
-            let timeline = Timeline(entries: [entry], policy: .after(nextUpdate))
+            let currentDate = Date()
+            let refreshDate = Calendar.current.date(byAdding: .hour, value: 8, to: currentDate)!
+            let timeline = Timeline(entries: [entry], policy: .after(refreshDate))
             completion(timeline)
-            }
+        }
     }
 }
 
@@ -48,51 +48,17 @@ struct SimpleEntry: TimelineEntry {
 }
 
 struct weather_widgetEntryView : View {
-    @Environment(\.widgetFamily) private var widgetFamily
+    //@Environment(\.widgetFamily) private var widgetFamily
     
     var entry: Provider.Entry
 
     var body: some View {
 
-        switch widgetFamily {
-            
-        case .systemSmall:
-            ZStack {
-                if entry.todaysymbol == "sun.max" {
-                    LinearGradient(gradient: Gradient(colors: [Color("topcolor"), Color("bottomcolor")]),
-                                   startPoint: .top, endPoint: .bottom)
-                    .edgesIgnoringSafeArea(.all)
-                }
-                else
-                {
-                    LinearGradient(gradient: Gradient(colors: [Color("graytopcolor"), Color("graybottomcolor")]),
-                                   startPoint: .top, endPoint: .bottom)
-                    .edgesIgnoringSafeArea(.all)
-                }//작은 상자 뷰 내용
-                VStack{
-                    Spacer()
-                    Image(systemName: entry.todaysymbol)
-                        .font(.system(size: 40))
-                        .foregroundColor(.yellow)
-                    Spacer()
-                    Text("\(entry.dailycontidion)")
-                        .bold()
-                        .font(.title3)
-                        .foregroundColor(.white)
-                    Text("\(entry.lowtemp.roundDouble())° ~ \(entry.hightemp.roundDouble())°")
-                        .foregroundColor(.white)
-                    Spacer()
-                    //add
-                    VStack(alignment: .trailing){
-                        Text("\(Image(systemName: "applelogo"))Weather")
-                            .foregroundColor(.white)
-                            .font(.subheadline)
-                    }
-                }
-            }
-        case .accessoryInline: //Lock screen 뷰 내용
+        //switch widgetFamily {
 
-            if entry.todaysymbol == "cloud.drizzle" || entry.todaysymbol == "cloud.rain" || entry.todaysymbol == "cloud.heavyrain" || entry.todaysymbol == "cloud.hail" || entry.todaysymbol == "cloud.snow" || entry.todaysymbol == "cloud.sleet" || entry.todaysymbol == "cloud.sun.rain" || entry.todaysymbol == "snowflake"
+        //case .accessoryInline:
+
+            if entry.todaysymbol == "cloud.drizzle" || entry.todaysymbol == "cloud.rain" || entry.todaysymbol == "cloud.heavyrain" || entry.todaysymbol == "cloud.hail" || entry.todaysymbol == "cloud.snow" || entry.todaysymbol == "snowflake" 
             {
                 Text("Bring your umbrella☔️")
             }
@@ -107,11 +73,10 @@ struct weather_widgetEntryView : View {
             {
                 Text("")
             }
-
             
-        default:
-            Text("unknown")
-        }
+        //default:
+            //Text("unknown")
+        //}
     }
 }
 
@@ -125,14 +90,16 @@ struct weather_widget: Widget {
         }
         .configurationDisplayName("Daily weather cast")
         .description("You can see the Daily weather cast")
-        .supportedFamilies([.systemSmall, .accessoryInline])
+        .supportedFamilies([.accessoryInline])
     }
 }
 
 //프리뷰
+/*
 struct weather_widget_Previews: PreviewProvider {
     static var previews: some View {
         weather_widgetEntryView(entry: SimpleEntry(date: Date(), dailycontidion: " ", todaysymbol: " ", hightemp: 0.0, lowtemp: 0.0))
             .previewContext(WidgetPreviewContext(family: .systemSmall))
     }
 }
+*/

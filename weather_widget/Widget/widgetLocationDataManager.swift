@@ -44,7 +44,7 @@ class widgetLocationDataManager : NSObject, ObservableObject, CLLocationManagerD
             authorizationStatus = .denied
             break
             
-        case .notDetermined:        // Authorization not determined yet.
+        case .notDetermined:   // Authorization not determined yet.
             authorizationStatus = .notDetermined
             manager.requestWhenInUseAuthorization()
             break

@@ -29,7 +29,7 @@ struct DailyWeatherView: View {
                 }
                 VStack {
                     VStack(alignment: .leading, spacing: 5) {
-                        Text("Weather Assistant")
+                        Text("ForecastMate")
                             .bold()
                             .font(.title)
                             .foregroundColor(.white)
@@ -103,7 +103,7 @@ struct DailyWeatherView: View {
                     .padding(.bottom, 20)
 
                     .foregroundColor(.white)
-                    .background(Color(hue: 0.656, saturation: 0.787, brightness: 0.354, opacity: 0.2))
+                    .background(Color(hue: 0.6, saturation: 0.7, brightness: 0.3, opacity: 0.2))
                     .cornerRadius(20, corners: [.topLeft, .topRight, .bottomLeft, .bottomRight])
                 
 
@@ -160,7 +160,6 @@ struct DailyWeatherView: View {
                 .padding()
                 .frame(maxWidth: .infinity, alignment: .leading)
             }
-            //.preferredColorScheme(.dark)
             .task {
                 await weatherKitManager.getWeather(latitude: locationDataManager.latitude, longitude: locationDataManager.longitude)
             }
