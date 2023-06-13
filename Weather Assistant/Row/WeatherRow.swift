@@ -39,4 +39,3 @@ struct WeatherRow_Previews: PreviewProvider {
         WeatherRow(logo: "thermometer", name: "Feels like", value: "8°")
     }
 }
-

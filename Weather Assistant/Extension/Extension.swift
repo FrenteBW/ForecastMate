@@ -15,7 +15,6 @@ extension Double {
     }
 }
 
-
 // Extension for adding rounded corners to specific corners
 extension View {
     func cornerRadius(_ radius: CGFloat, corners: UIRectCorner) -> some View {
