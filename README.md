@@ -26,6 +26,10 @@
 
 https://apps.apple.com/kr/app/forecastmate/id1669165264
 
+# - Update
+
+2023.06.13 : 디자인 수정 및 코드 리팩토링
+
 # - Contact 
 
 📧 : abw2619@naver.com
