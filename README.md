@@ -21,6 +21,33 @@
 
 <img width="1134" alt="%EC%8A%A4%ED%81%AC%EB%A6%B0%EC%83%B7%202023-03-28%20%EC%98%A4%ED%9B%84%205 14 56" src="https://user-images.githubusercontent.com/88021794/229045403-04bcbd5b-00c9-481f-a0ee-b567d724ffb6.png">
 
+# - 핵심코드
+    //우산을 챙겨야 하거나, 기온이 많이 높거나 낮을 때만 위젯엣서 이를 표시
+    struct weather_widgetEntryView : View {
+    
+    var entry: Provider.Entry
+
+    var body: some View {
+            //우산을 챙겨야 할 떄
+            if entry.todaysymbol == "cloud.drizzle" || entry.todaysymbol == "cloud.rain" || entry.todaysymbol == "cloud.heavyrain" || entry.todaysymbol == "cloud.hail" || entry.todaysymbol == "cloud.snow" || entry.todaysymbol == "snowflake" 
+            {
+                Text("Bring your umbrella☔️")
+            }
+            //기온이 매우 낮을 때
+            else if entry.lowtemp <= -10 {
+                Text("It's cold outside🥶")
+            }
+            //기온이 매우 높을 때
+            else if entry.hightemp >= 35 {
+                Text("It's hot outside🥵")
+            }
+            else
+            {
+                Text("")
+            }
+    }
+}
+
 
 # - Appstore link
 
