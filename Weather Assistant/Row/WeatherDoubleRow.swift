@@ -43,10 +43,10 @@ struct WeatherDoubleRow: View {
     }
 }
 
+/*
 struct WeatherDoubleRow_Previews: PreviewProvider {
     static var previews: some View {
         WeatherDoubleRow(logo: "thermometer", name: "Feels like", value: "8°", secondvalue: "10")
     }
 }
-
-
+*/

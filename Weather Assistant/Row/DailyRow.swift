@@ -49,8 +49,10 @@ struct DailyRow: View {
     }
 }
 
+/*
 struct DailyRow_Previews: PreviewProvider {
     static var previews: some View {
         DailyRow(dailydate: " ", logo: "thermometer", name: "Feels like", value: "8°", secondvalue: "10")
     }
 }
+*/

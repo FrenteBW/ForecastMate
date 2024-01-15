@@ -94,7 +94,6 @@ struct weather_widget: Widget {
     }
 }
 
-//프리뷰
 /*
 struct weather_widget_Previews: PreviewProvider {
     static var previews: some View {

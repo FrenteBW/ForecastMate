@@ -34,9 +34,10 @@ struct HourlyRow: View {
     }
 }
 
+/*
 struct HourlyRow_Previews: PreviewProvider {
     static var previews: some View {
         HourlyRow(hourlytime: " ", logo: " ", hourlytemp: " ")
     }
 }
-
+*/
